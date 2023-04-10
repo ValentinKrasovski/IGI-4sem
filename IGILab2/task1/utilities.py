@@ -44,7 +44,7 @@ def count_nondeclarative_sentences(text: str):
     return len(result)
 
 
-def __list_of_words(text: str):
+def list_of_words(text: str):
     words = re.findall(r'\b\w+\b', text)
     nums = re.findall(r'\b\d+\b', text)
     list_words = [word for word in words if word not in nums]
@@ -53,7 +53,7 @@ def __list_of_words(text: str):
 
 def average_len_words(text: str):
     total_lenght = 0
-    total_words = __list_of_words(text)
+    total_words = list_of_words(text)
 
     for word in total_words:
         total_lenght += len(word)
@@ -63,18 +63,33 @@ def average_len_words(text: str):
 
 def average_len_sentences(text: str):
     total_lenght = 0
-    total_words = __list_of_words(text)
+    total_words = list_of_words(text)
 
     for word in total_words:
         total_lenght += len(word)
 
-    return  total_lenght/total_number_sentences(text)
+    return total_lenght / total_number_sentences(text)
 
 
+def my_counter(lst):
+    counter_dict = {}
+    for element in lst:
+        if element in counter_dict:
+            counter_dict[element] += 1
+        else:
+            counter_dict[element] = 1
+    return counter_dict
 
 
 def top_repeted_grams(text: str, k: int = 4, n: int = 4):
     words = re.findall(r'\b\w+\b', text)
     ngrams = [tuple(words[i:i + n]) for i in range(len(words) - n + 1)]
-    top_ngrams = collections.Counter(ngrams).most_common(k)
+    #   top_ngrams = collections.Counter(ngrams).most_common(k)
+    kv = []
+    for x, y in my_counter(ngrams).items():
+        kv.append((x, y))
+    #kv.sort(reverse=True)
+    top_ngrams = []
+    for i in range(k):
+        top_ngrams.append(kv.pop())
     return top_ngrams
