@@ -21,9 +21,10 @@ from django.conf.urls.static import static
 
 app_name = 'shop'  # Добавьте это в модуль shop.urls
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('cart.urls', namespace='cart')),
+    path('', include(('cart.urls', 'cart'), namespace='cart')),
     path('', include(('shop.urls', 'shop'), namespace='shop')),  # Обновленная строка
 ]
 
