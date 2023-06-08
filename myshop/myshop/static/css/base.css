@@ -1,0 +1,44 @@
+body {
+    background-size: cover;
+}
+
+/* Стили для заголовка */
+#header {
+  background-color: #42b6f5;
+  padding: 10px;
+  text-align: center;
+}
+
+#header .logo {
+  color: black;
+  font-size: 24px;
+  text-decoration: none;
+  text-align: center;
+}
+
+/* Стили для подзаголовка */
+#subheader {
+  background-color: #42b6f5;
+  padding: 10px;
+  color: black; /* Set text color to black */
+}
+
+#subheader .cart {
+  font-size: 16px;
+}
+
+/* Стили для контента */
+#content {
+  padding: 20px;
+}
+
+/* Стили для изображения */
+.resized-image {
+  max-width: 200px; /* Измените нужную ширину */
+  max-height: 200px; /* Измените нужную высоту */
+}
+
+img {
+    width: 400px;
+    height: 400px;
+}

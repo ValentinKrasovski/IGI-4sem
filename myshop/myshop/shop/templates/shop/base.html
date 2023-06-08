@@ -2,19 +2,30 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>{% block title %}Мой магазин{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>{% block title %}SWEET GINGERBREAD{% endblock %}</title>
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     <link href="{% static 'css/list.css' %}" rel="stylesheet">
     <link href="{% static 'css/detail.css' %}" rel="stylesheet">
 </head>
-<body background="static/images/5-fon.png">
+<body style="background-size: cover" background="/static/images/5-fon.png">
 <div id="header">
-    <a href="/" class="logo" >Мой магазин</a>
+    <a href="/" class="logo" >SWEET GINGERBREAD</a>
 </div>
 <div id="subheader">
     <div class="cart">
-        Ваша корзина пуста.
-    </div>
+        {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+            Your cart:
+            <a href="{% url 'cart:cart_detail' %}">
+                {{ total_items }} item{{ total_items|pluralize }},
+                ${{ cart.get_total_price }}
+            </a>
+        {% else %}
+            Your cart is empty.
+        {% endif %}
+    {% endwith %}
+</div>
 </div>
 <div id="content">
     {% block content %}
