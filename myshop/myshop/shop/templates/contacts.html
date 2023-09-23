@@ -1,0 +1,17 @@
+{% extends "default.html" %}
+{% block title %}Контакты{% endblock %}
+{% block content %}
+    <h1>Сотрудники</h1>
+    <ul>
+        {% for employee in employees %}
+        <li>
+            <h2>{{ employee.first_name }} {{ employee.last_name }}</h2>
+            <img src="{{employee.image.url}}" alt="{{ employee.last_name }}">
+            <p>Должность: {{ employee.position }}</p>
+            <p>Email: {{ employee.email }}</p>
+            <p>Телефон: {{ employee.phone }}</p>
+            <p>Описание: {{ employee.description }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

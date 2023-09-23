@@ -1,0 +1,21 @@
+{% extends "default.html" %}
+{% block title %}
+FAQ
+{% endblock %}
+{% block content %}
+<h1>Часто задаваемые вопросы</h1>
+<ul>
+    {% for faq in faqs %}
+    <li>
+        {% if faq.user_name %}
+        <p>Задано пользователем: {{ faq.user_name }} <br> {{faq.date_added}}</p>
+        {% endif %}
+        <details>
+            <summary>{{ faq.question }}</summary>
+            <p>{{ faq.answer }}</p>
+        </details>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'shop:ask_question' %}">Задать новый вопрос</a>
+{% endblock %}

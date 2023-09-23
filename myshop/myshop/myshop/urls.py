@@ -19,10 +19,11 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
-app_name = 'shop'  # Добавьте это в модуль shop.urls
+app_name = 'shop'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
     path('orders/', include(('orders.urls', 'orders'), namespace='orders')),
     path('cart/', include(('cart.urls', 'cart'), namespace='cart')),
     path('', include(('shop.urls', 'shop'), namespace='shop')),

@@ -1,0 +1,12 @@
+{% extends "default.html" %}
+{% block title %}Вопросы{% endblock %}
+{% block content %}
+    <h1>Задать новый вопрос</h1>
+    <form method="post" >
+        {% csrf_token %}
+        <table>
+            {{ form }}
+        </table>
+        <button type="submit">Отправить</button>
+    </form>
+{% endblock %}

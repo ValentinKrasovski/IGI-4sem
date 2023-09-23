@@ -1,0 +1,8 @@
+{% extends "default.html" %}
+{% block title %}{{privacy_policy.title}}{% endblock %}
+{% block content %}
+  <h1>Политика конфиденциальности</h1>
+<div class="privicy_policy">
+  <pre>{{ privacy_policy.content }}</pre>
+</div>
+{% endblock %}
