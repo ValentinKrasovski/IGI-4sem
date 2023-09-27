@@ -1,8 +1,11 @@
+from django.contrib.sites import requests
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Category, Product, Article, Partner, Company, FAQ, Employee, Vacancy, PrivacyPolicy
-from .forms import FAQForm
+from .models import Category, Product, Article, Partner, Company, FAQ, Employee, Vacancy, PrivacyPolicy, Review, Coupon
+from .forms import FAQForm, ReviewForm
+from django.contrib.auth.decorators import login_required
 from cart.forms import CartAddProductForm
-
+import pytz
+import datetime
 
 def home(request):
     # Получаем последнюю опубликованную статью
@@ -10,10 +13,12 @@ def home(request):
 
     # Получаем список компаний-партнеров
     partners = Partner.objects.all()
-
+    user_timezone = pytz.timezone(request.session.get('user_timezone', 'UTC'))
+    user_current_time = datetime.datetime.now(user_timezone)
     context = {
         'latest_article': latest_article,
         'partners': partners,
+        'user_current_time': user_current_time,
     }
     return render(request, 'home.html', context)
 
@@ -36,21 +41,6 @@ def article_detail(request, article_id):
 
 
 # Вопросы и ответы
-# def faq(request):
-#     faqs = FAQ.objects.all().order_by('-date_added')
-#     show_question_form = request.method == 'GET'  # Показать форму только при GET-запросе
-#     form = FAQForm() if show_question_form else None
-#
-#     if request.method == 'POST':
-#         form = FAQForm(request.POST)
-#         if form.is_valid():
-#             question = form.cleaned_data['question']
-#             user_name = form.cleaned_data['user_name']
-#             faq = FAQ(question=question, user_name=user_name)
-#             faq.save()
-#             return redirect('shop:faq')
-#
-#     return render(request, 'faq.html', {'faqs': faqs, 'show_question_form': show_question_form, 'form': form})
 def faq(request):
     faqs = FAQ.objects.all().order_by('-date_added')
     return render(request, 'faq.html', {'faqs': faqs})
@@ -85,7 +75,35 @@ def vacancies(request):
     vacancies = Vacancy.objects.all()
     return render(request, 'vacancies.html', {'vacancies': vacancies})
 
+#Отзывы
 
+@login_required
+def review_list(request):
+    reviews = Review.objects.all().order_by('-date_added')
+    return render(request, 'review_list.html', {'reviews': reviews})
+
+@login_required
+def add_review(request):
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.save()
+            return redirect('shop:review_list')
+    else:
+        form = ReviewForm()
+    return render(request, 'add_review.html', {'form': form})
+
+#Купоны
+@login_required
+def coupons(request):
+    active_coupons = Coupon.objects.filter(active=True)
+    archived_coupons = Coupon.objects.filter(active=False)
+    return render(request, 'coupons.html', {'active_coupons': active_coupons, 'archived_coupons':archived_coupons})
+
+def example_view(request):
+    return render(request, 'example.html')
 
 
 def product_list(request, category_slug=None):
@@ -111,3 +129,4 @@ def product_detail(request, id, slug):
     return render(request, 'shop/product/detail.html',
                   {'product': product,
                    'cart_product_form': cart_product_form})
+

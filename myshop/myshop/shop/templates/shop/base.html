@@ -6,11 +6,45 @@
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     <link href="{% static 'css/list.css' %}" rel="stylesheet">
     <link href="{% static 'css/detail.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'images/ICON.png' %}" type="image/x-icon">
 </head>
 <body style="background-size: cover" background="/static/images/5-fon.png">
-<div id="header">
-    <a href="/" class="logo">SWEET GINGERBREAD</a>
-</div>
+
+<header>
+    <h1>Добро пожаловать в наш магазин!</h1>
+    <h2>
+        <nav class="navigation_panel" style="font-size: 20px">
+            <a href="{% url 'shop:home' %}">Главная</a>
+            <a href="{% url 'shop:about_company' %}">О компании</a>
+            <a href="{% url 'shop:article_list' %}">Новости</a>
+            <a href="{% url 'shop:faq' %}">Словарь терминов и понятий</a>
+            <a href="{% url 'shop:contact_list' %}">Контакты</a>
+            <a href="{% url 'shop:privacy_policy' %}">Политика конфиденциальности</a>
+            <a href="{% url 'shop:vacancies' %}">Вакансии</a>
+            <a href="{% url 'shop:review_list' %}">Отзывы</a>
+            <a href="{% url 'shop:coupons' %}">Промокоды и купоны</a>
+            <a href="{% url 'shop:product_list' %}">Перейти к каталогу</a>
+
+            {% if user.is_authenticated %}
+            <a href="{% url 'accounts:logout_view' %}">Выйти из учетной записи</a>
+            {% else %}
+            <a href="{% url 'accounts:login_view' %}">Войти в аккаунт</a>
+            <a href="{% url 'accounts:registration' %}">Зарегистрироваться?</a>
+            {% endif %}
+            <br>
+            {% if user.is_superuser %}
+            <a href="/orders/statistics/" class="logo">Статистика</a>
+            <a href="/orders/statistics1/" class="logo">Статистика2</a>
+            <a href="{% url 'shop:example_view' %}" >Песочница</a>
+            {% endif %}
+
+        </nav>
+
+    </h2>
+    {% if user.is_authenticated %}
+    Здравствуйте,{{user.username}}!
+    {% endif %}
+</header>
 <div id="subheader">
     <div class="cart">
         {% with total_items=cart|length %}
@@ -30,18 +64,4 @@
     {% block content %}
     {% endblock %}
 </div>
-<footer>
-    <nav>
-        <ul>
-            <li><a href="{% url 'shop:home' %}">Главная</a></li>
-            <li><a href="{% url 'shop:about_company' %}">О компании</a></li>
-            <li><a href="{% url 'shop:home' %}">Новости</a></li>
-            <li><a href="{% url 'shop:home' %}">Словарь терминов и понятий</a></li>
-            <li><a href="{% url 'shop:home' %}">Контакты</a></li>
-            <li><a href="{% url 'shop:home' %}">Политика конфиденциальности</a></li>
-            <li><a href="{% url 'shop:home' %}">Отзывы</a></li>
-            <li><a href="{% url 'shop:home' %}">Промокоды и купоны</a></li>
-        </ul>
-    </nav>
-</footer>
 </body>

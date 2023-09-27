@@ -1,69 +1,66 @@
-<!DOCTYPE html>
-<html>
+{% extends "default.html" %}
 {% load static %}
-<head>
-    <title>О Компании</title>
-</head>
-<body>
-<main>
-    <h1><em>{{ company.name }}</em></h1>
+{% block title %}Контакты{% endblock %}
+{% block content %}
 
-    <img src="{{ company.logo.url }}" alt="{{ company.name }} Logo">
+<h1><em>{{ company.name }}</em></h1>
 
-    <pre>{{ company.description }}</pre>
-    <a href="#system">Вы также можете взглянуть на сертификат</a><br>
+<img src="{{ company.logo.url }}" alt="{{ company.name }} Logo">
 
-    <iframe width="560" height="315" src="{{company.video_url}}"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-    </iframe>
+<pre>{{ company.description }}</pre>
+<a href="#system">Вы также можете взглянуть на сертификат</a><br>
 
-    <h2>История компании</h2>
-    <pre>{{ company.history }}</pre>
+<iframe width="560" height="315" src="{{company.video_url}}"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+</iframe>
 
-    <h2>Реквизиты</h2>
-    <pre>{{ company.requisites }}</pre>
-</main>
-<figure>
-    <section class="certificate-section">
-        <h1 id="system"><b>Система сертификации <em>ГОСТ Р</em></b></h1>
-        <p><em>Федеральное агентство по техническому регулированию и метрологии</em></p>
-    </section>
-    <section class="certificate-section">
-        <h2 id="certificate"><strong>Сертификат соответствия</strong></h2>
-        <p>№ РОСС RU.АГ77.Ь00535</p>
-        <p>Срок действия с 16.03.2021 по 15.03.2024</p>
-        <p>№0101232</p>
-        <p>Орган по сертификации <small>рег. №РОСС RU.0001.10АГ77</small></p>
-        <p>продукции и услуг федерального бюджетного учреждения <wb>"Государственный региональный центр стандартизации,
-            метрологии и испытаний в Оренбургской области" (ФБУ "Оренбургский ЦСМ")</p>
-        <p><small>ул. 60 лет Октября, д.2 "Б", г. Оренбург, Российская Федерация,<br> 460021, тел. (3532) 33-82, 33-31-05</small></p>
-    </section>
-    <section class="certificate-section">
-        <h2 id="executor">ИСПОЛНИТЕЛЬ</h2>
-        <p>Индивидуальный предприниматель Рябцев Евгений Геннадьевич, цех "<em>Uno-momento</em>"</p>
-        <p>ОГРНИП №304560703000041 от 30.01.2004</p>
-        <p>Код-ОКПО: 0145225789. ИНН: 560708506854</p>
-        <p>Юридический адрес: 462356, РФ, Оренбургская обл., г. Новотроицк, ул. Мичурина</p>
-        <p>Фактический адрес: 462420, РФ, Оренбургская обл., г. Орск, ул. Краматорская, 50 А</p>
-        <p>Телефон: (3537) 66-00-88, 31-03-03</p>
-    </section>
-    <section class="certificate-section">
-        <h2 id="director">Руководитель органа</h2>
-        <p>А.П. Антипова</p>
-    </section>
-    <section class="certificate-section">
-        <h2 id="expert">Эксперт</h2>
-        <p><С.В. Коваленко</p>
-    </section>
-    <section class="certificate-section">
-        <h2 id="not-applicable">Сертификат не применяется при обязательной сертификации</h2>
-    </section>
-    <footer>
-        <p><sup>&copy;</sup> 2023 Федеральное агентство по техническому регулированию и метрологии</p>
-    </footer>
-</figure>
-<a href="{% url 'shop:home' %}">Перейти на главную страницу</a>
-</body>
-</html>
+<h2>История компании</h2>
+<pre>{{ company.history }}</pre>
+
+<h2>Реквизиты</h2>
+<pre>{{ company.requisites }}</pre>
+
+<section class="certificate-section">
+    <h1 id="system"><b>Система сертификации <em>ГОСТ Р</em></b></h1>
+    <p><em>Федеральное агентство по техническому регулированию и метрологии</em></p>
+</section>
+<section class="certificate-section">
+    <h2 id="certificate"><strong>Сертификат соответствия</strong></h2>
+    <p>№ РОСС RU.АГ77.Ь00535</p>
+    <p>Срок действия с 16.03.2021 по 15.03.2024</p>
+    <p>№0101232</p>
+    <p>Орган по сертификации <small>рег. №РОСС RU.0001.10АГ77</small></p>
+    <p>продукции и услуг федерального бюджетного учреждения
+        <wb>"Государственный региональный центр стандартизации,
+            метрологии и испытаний в Оренбургской области" (ФБУ "Оренбургский ЦСМ")
+    </p>
+    <p><small>ул. 60 лет Октября, д.2 "Б", г. Оренбург, Российская Федерация,<br> 460021, тел. (3532) 33-82,
+        33-31-05</small></p>
+</section>
+<section class="certificate-section">
+    <h2 id="executor">ИСПОЛНИТЕЛЬ</h2>
+    <p>Индивидуальный предприниматель Рябцев Евгений Геннадьевич, цех "<em>Uno-momento</em>"</p>
+    <p>ОГРНИП №304560703000041 от 30.01.2004</p>
+    <p>Код-ОКПО: 0145225789. ИНН: 560708506854</p>
+    <p>Юридический адрес: 462356, РФ, Оренбургская обл., г. Новотроицк, ул. Мичурина</p>
+    <p>Фактический адрес: 462420, РФ, Оренбургская обл., г. Орск, ул. Краматорская, 50 А</p>
+    <p>Телефон: (3537) 66-00-88, 31-03-03</p>
+</section>
+<section class="certificate-section">
+    <h2 id="director">Руководитель органа</h2>
+    <p>А.П. Антипова</p>
+</section>
+<section class="certificate-section">
+    <h2 id="expert">Эксперт</h2>
+    <p>С.В. Коваленко</p>
+</section>
+<section class="certificate-section">
+    <h2 id="not-applicable">Сертификат не применяется при обязательной сертификации</h2>
+</section>
+<section class="certificate-section">
+    <p><sup>&copy;</sup> 2023 Федеральное агентство по техническому регулированию и метрологии</p>
+</section>
+
+{% endblock %}

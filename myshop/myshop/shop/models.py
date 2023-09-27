@@ -1,16 +1,22 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from django.utils import timezone
 
-#Модели для Главной страницы
+
+# Модели для Главной страницы
 class Article(models.Model):
     title = models.CharField(max_length=200)
-    short_content=models.CharField(max_length=300)
+    short_content = models.CharField(max_length=300)
     content = models.TextField()
     image = models.ImageField(upload_to='article_images/')
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
         return self.title
+
 
 class Partner(models.Model):
     name = models.CharField(max_length=200)
@@ -19,6 +25,8 @@ class Partner(models.Model):
 
     def __str__(self):
         return self.name
+
+
 # О компании
 class Company(models.Model):
     name = models.CharField(max_length=100)
@@ -29,7 +37,8 @@ class Company(models.Model):
     history = models.TextField()
     requisites = models.TextField()
 
-#Частозадаваемые вопросы
+
+# Частозадаваемые вопросы
 class FAQ(models.Model):
     user_name = models.CharField(max_length=255, verbose_name='Имя пользователя')
     question = models.TextField(verbose_name='Вопрос')
@@ -39,7 +48,8 @@ class FAQ(models.Model):
     def __str__(self):
         return self.question
 
-#Контакты
+
+# Контакты
 class Employee(models.Model):
     first_name = models.CharField(max_length=100, verbose_name='Имя')
     last_name = models.CharField(max_length=100, verbose_name='Фамилия')
@@ -56,7 +66,8 @@ class Employee(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-#Политика
+
+# Политика
 class PrivacyPolicy(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
@@ -64,7 +75,8 @@ class PrivacyPolicy(models.Model):
     def __str__(self):
         return self.title
 
-#Вакансии
+
+# Вакансии
 class Vacancy(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -73,6 +85,36 @@ class Vacancy(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# Отзывы
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.PositiveIntegerField()
+    text = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review by {self.user.username} - {self.date_added}"
+
+
+# Промокоды
+class Coupon(models.Model):
+    code = models.CharField(max_length=15, unique=True)
+    description = models.TextField(blank=True, null=True)
+    valid_from = models.DateTimeField()
+    valid_to = models.DateTimeField()
+    discount = models.DecimalField(max_digits=10, decimal_places=2)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.code
+
+
+@receiver(pre_save, sender=Coupon)
+def set_coupon_active(sender, instance, **kwargs):
+    if instance.valid_to < timezone.now():
+        instance.active = False
 
 
 class Category(models.Model):

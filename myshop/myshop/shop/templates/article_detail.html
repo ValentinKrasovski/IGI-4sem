@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ article.title }}</title>
-</head>
-<body>
+{% extends "default.html" %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block content %}
     <h1>{{ article.title }}</h1>
-    <img src="{{ article.image.url }}" alt="{{ article.title }}">
+    <img src="{{ article.image.url }}" width="450" alt="{{ article.title }}">
     <p>{{ article.content }}</p>
-    <footer>
-        <br><a href="{% url 'shop:article_list' %}">Вернуться к списку статей</a>
-    </footer>
-
-</body>
-</html>
+{% endblock %}

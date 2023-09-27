@@ -1,21 +1,28 @@
-<!DOCTYPE html>
-<html>
+{% extends "default.html" %}
 {% load static %}
-<head>
-    <title>Главная</title>
-</head>
-<body>
-    <header>
-        <h1>Добро пожаловать в наш магазин!</h1>
-        <a href="product_list/">Перейти к каталогу</a>
-    </header>
-    <h2><em>Последняя новость!</em></h2>
-    <h3>{{ latest_article.title }} <a href="{% url 'shop:article_detail' latest_article.id  %}"><small>Читать далее</small></a></h3>
-    <img src="{% static 'images/banner.png' %}" alt="Рекламный баннер">
+{% block title %}Главная{% endblock %}
 
-    <h2>Список компаний-партнеров:</h2>
-    <nav>
-        <ul>
+{% block content %}
+
+<h2><em>Последняя новость!</em></h2>
+<h3>
+    {{ latest_article.title }} <a href="{% url 'shop:article_detail' latest_article.id  %}"><small>Читать далее</small></a>
+</h3>
+
+<figure id="cite_banner">
+    <picture>
+        <source srcset="{% static 'images/mob_banner.jpg' %}" media="(max-width: 767px)">
+        <source srcset="{% static 'images/plan_banner.jpg' %}" media="(min-width: 768px) and (max-width: 1024px)">
+        <source srcset="{% static 'images/desctop_banner.jpg' %}" media="(min-width: 1025px)">
+        <img src="{% static 'images/banner.png' %}" alt="Рекламный баннер">
+    </picture>
+    <figcaption>Баннер нашего магазина.</figcaption>
+</figure>
+
+
+<h2>Список компаний-партнеров:</h2>
+<nav id="company_partners">
+    <ul>
         {% for partner in partners %}
         <li>
             <a href="{{ partner.website }}" target="_blank">
@@ -24,22 +31,5 @@
         </li>
         {% endfor %}
     </ul>
-    </nav>
-
-<footer>
-    <nav>
-        <ul>
-            <li><a href="{% url 'shop:home' %}">Главная</a></li>
-            <li><a href="{% url 'shop:about_company' %}">О компании</a></li>
-            <li><a href="{% url 'shop:article_list' %}">Новости</a></li>
-            <li><a href="{% url 'shop:faq' %}">Словарь терминов и понятий</a></li>
-            <li><a href="{% url 'shop:contact_list' %}">Контакты</a></li>
-            <li><a href="{% url 'shop:privacy_policy' %}">Политика конфиденциальности</a></li>
-            <li><a href="{% url 'shop:vacancies' %}">Вакансии</a></li>
-            <li><a href="{% url 'shop:home' %}">Отзывы</a></li>
-            <li><a href="{% url 'shop:home' %}">Промокоды и купоны</a></li>
-        </ul>
-    </nav>
-</footer>
-</body>
-</html>
+</nav>
+{% endblock %}

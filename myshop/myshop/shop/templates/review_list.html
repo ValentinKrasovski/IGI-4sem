@@ -1,0 +1,16 @@
+{% extends "default.html" %}
+{% block title %}Отзывы{% endblock %}
+{% block content %}
+    <h1>Отзывы</h1>
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <strong>Пользователь: {{ review.user.username }}</strong><br>
+                <strong>Оценка: {{ review.rating }}</strong><br>
+                Текст: {{ review.text }}<br>
+                <em>Дата: {{ review.date_added }}</em>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'shop:add_review' %}">Add a Review</a>
+{% endblock %}

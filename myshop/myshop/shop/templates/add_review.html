@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Review</title>
+</head>
+<body>
+    <h1>Добавить отзыв</h1>
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Отправить отзыв</button>
+        </form>
+    {% else %}
+        <p>You need to <a href="{% url 'accounts:login_view' %}">log in</a> or <a href="{% url 'accounts:registration' %}">register</a> to add a review.</p>
+    {% endif %}
+    <a href="{% url 'shop:review_list' %}">Вернуться к отзывам</a>
+</body>
+</html>

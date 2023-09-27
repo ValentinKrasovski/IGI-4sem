@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Новости</title>
-</head>
-<body>
+{% extends "default.html" %}
+{% block title %}Новости{% endblock %}
+{% block content %}
 <h1>Новости кондитерского магазина</h1>
 
 {% for article in articles %}
 <div class="article">
     <h2>{{ article.title }}</h2>
-    <img src="{{ article.image.url }}" alt="{{ article.title }}">
+    <img src="{{ article.image.url }}" width="450" alt="{{ article.title }}">
     <p>{{ article.short_content }}</p>
     <a href="{% url 'shop:article_detail' article.id  %}">Читать далее</a>
 </div>
 {% endfor %}
-<footer>
-    <br><a href="{% url 'shop:home' %}">Перейти на Главную страницу</a>
-</footer>
-</body>
-</html>
+{% endblock %}

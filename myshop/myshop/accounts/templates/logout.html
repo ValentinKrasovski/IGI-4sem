@@ -5,7 +5,8 @@
     <title>Logout</title>
 </head>
 <body>
-    <h1>Logout</h1>
-    <p>You have been logged out. <a href="{% url 'login_view' %}">Log in again</a></p>
+    <h1>Выход</h1>
+    <p>Вы вышли из своего аккаунта! <a href="{% url 'accounts:login_view' %}">Войти в аккаунт</a></p>
+    <p><a href="{% url 'shop:home' %}">Перейти на главную страницу</a></p></p>
 </body>
 </html>

@@ -6,7 +6,7 @@
         {% for employee in employees %}
         <li>
             <h2>{{ employee.first_name }} {{ employee.last_name }}</h2>
-            <img src="{{employee.image.url}}" alt="{{ employee.last_name }}">
+            <img src="{{employee.image.url}}" width="650" alt="{{ employee.last_name }}">
             <p>Должность: {{ employee.position }}</p>
             <p>Email: {{ employee.email }}</p>
             <p>Телефон: {{ employee.phone }}</p>

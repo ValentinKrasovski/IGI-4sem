@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
+    <meta name="author" content="Valentine">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'images/ICON.png' %}" type="image/x-icon">
 </head>
 <body>
 <header>
+    <h1>Добро пожаловать в наш магазин!</h1>
+    <h2>
+        <nav class="navigation_panel" style="font-size: 20px">
+            <a href="{% url 'shop:home' %}">Главная</a>
+            <a href="{% url 'shop:about_company' %}">О компании</a>
+            <a href="{% url 'shop:article_list' %}">Новости</a>
+            <a href="{% url 'shop:faq' %}">Словарь терминов и понятий</a>
+            <a href="{% url 'shop:contact_list' %}">Контакты</a>
+            <a href="{% url 'shop:privacy_policy' %}">Политика конфиденциальности</a>
+            <a href="{% url 'shop:vacancies' %}">Вакансии</a>
+            <a href="{% url 'shop:review_list' %}">Отзывы</a>
+            <a href="{% url 'shop:coupons' %}">Промокоды и купоны</a>
+            <a href="{% url 'shop:product_list' %}">Перейти к каталогу</a>
+
+            {% if user.is_authenticated %}
+            <a href="{% url 'accounts:logout_view' %}">Выйти из учетной записи</a>
+            {% else %}
+            <a href="{% url 'accounts:login_view' %}">Войти в аккаунт</a>
+            <a href="{% url 'accounts:registration' %}">Зарегистрироваться?</a>
+            {% endif %}
+            <br>
+            {% if user.is_superuser %}
+            <a href="/orders/statistics/" >Стaтистика</a>
+            <a href="/orders/statistics1/" >Статистика2</a>
+            <a href="{% url 'shop:example_view' %}" >Песочница</a>
+            {% endif %}
+
+        </nav>
+
+    </h2>
+    {% if user.is_authenticated %}
+    Здравствуйте,{{user.username}}!
+    {% endif %}
 </header>
 
 <main>
@@ -14,19 +50,9 @@
 </main>
 
 <footer>
-    <nav>
-        <ul>
-            <li><a href="{% url 'shop:home' %}">Главная</a></li>
-            <li><a href="{% url 'shop:about_company' %}">О компании</a></li>
-            <li><a href="{% url 'shop:article_list' %}">Новости</a></li>
-            <li><a href="{% url 'shop:faq' %}">Словарь терминов и понятий</a></li>
-            <li><a href="{% url 'shop:contact_list' %}">Контакты</a></li>
-            <li><a href="{% url 'shop:privacy_policy' %}">Политика конфиденциальности</a></li>
-            <li><a href="{% url 'shop:vacancies' %}">Вакансии</a></li>
-            <li><a href="{% url 'shop:home' %}">Отзывы</a></li>
-            <li><a href="{% url 'shop:home' %}">Промокоды и купоны</a></li>
-        </ul>
-    </nav>
+    <div class="footer-bottom">
+        <p>&copy; 2023 Lovin Sweet. Мы рады дарить Вам хорошее настроение.</p>
+    </div>
 </footer>
 </body>
 </html>

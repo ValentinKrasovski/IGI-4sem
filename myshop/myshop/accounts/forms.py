@@ -1,6 +1,12 @@
 from django import forms
 from django.contrib.auth.models import User  # Импортируем User из django.contrib.auth.models
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+
+class LoginForm(AuthenticationForm):
+    class Meta:
+        fields = ['username', 'password']
+
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='Required. Enter a valid email address.')
