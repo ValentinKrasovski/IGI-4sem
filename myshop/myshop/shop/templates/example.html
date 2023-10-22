@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
 {% load static %}
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,18 +9,26 @@
     <meta name="description" content="Описание вашего сайта">
     <meta name="keywords" content="Ключевые слова">
 
-    <!-- Иконка сайта -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!-- Семантическая верстка -->
     <title>Заголовок вашей страницы</title>
 
     <!-- Глобальные стили CSS -->
-    <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/example.css' %}">
 </head>
 <body>
 <!-- Семантическое выделение текста -->
 <p><strong>Выделенный текст</strong></p>
+
+<p>Альберт Эйнштейн сказал: <q>Фантазия важнее знания.</q></p>
+<blockquote>
+    <p>Важно не то, что мы видим, а то, как мы это видим.</p>
+    <footer>- Генри Дэвид Торо</footer>
+</blockquote>
+
+<p>HTML (<dfn lang="en">Hypertext Markup Language</dfn>) - это стандартный язык разметки веб-страниц.</p>
+<p><abbr title="Гипертекстовый язык разметки">HTML</abbr> - это стандартный язык разметки веб-страниц.</p>
+
 
 <!-- Пример листинга -->
 <pre>
@@ -35,46 +43,12 @@
 <!-- Микро и мета данные -->
 <time datetime="2023-09-12">12 сентября 2023 года</time>
 
-<!-- Цитата и микроданные -->
-<figure itemscope itemtype="http://schema.org/Quotation">
-    <blockquote>
-        <p itemprop="text">Жизнь — это то, что с вами происходит, пока вы строите планы.</p>
-    </blockquote>
-    <figcaption>
-        <p>Определение: <span itemprop="name">Жизнь</span> - это нечто непредсказуемое и удивительное.</p>
-        <p>Автор: <span itemprop="author">Джон Леннон</span></p>
-    </figcaption>
-</figure>
-
-<!-- Список определений -->
-<dl>
-  <dt>HTML-документ</dt>
- <dd>
-   Обычный текстовый файл, который может содержать...
- </dd>
- <dt>Сайт</dt>
- <dd>
-   Cайт — это набор отдельных веб-страниц, которые связаны
-   между собой ссылками и единым оформлением.
- </dd>
-</dl>
-<!--Выпадающий список -->
-<label for="cars">Выберите марку автомобиля:</label>
-<select id="cars" name="cars">
-    <option value="volvo">Volvo</option>
-    <option value="saab">Saab</option>
-    <option value="mercedes">Mercedes</option>
-    <option value="audi">Audi</option>
-</select>
-
 <!-- Четверостишие -->
 <p>Roses are red,<br>
     Violets are blue,<br>
     Sugar is sweet,<br>
     And so are you.</p>
 
-<p>Известное высказывание Эйнштейна:</p>
-    <q>Фантазия важнее знания. Знание ограничено. Воображение объединяет мир.</q><br>
 <!-- Ссылки -->
 <a href="https://www.example.com">Обычная ссылка</a><br>
 <a href="https://www.example.com" download>Скачать документ</a><br>
@@ -90,10 +64,6 @@
     <li>Пункт 1</li>
     <li>Пункт 2</li>
 </ul>
-<ol>
-    <li>Пункт 3</li>
-    <li>Пункт 4</li>
-</ol>
 
 <!-- Фигуры -->
 <figure>
@@ -102,11 +72,11 @@
 </figure>
 
 <!-- Навигация -->
-<nav>
+<nav itemscope itemtype="http://schema.org/SiteNavigationElement">
     <ul>
-        <li><a href="/">Главная</a></li>
-        <li><a href="/about">О нас</a></li>
-        <li><a href="/contact">Контакты</a></li>
+        <li itemprop="name"><a href="/" itemprop="url">Главная</a></li>
+        <li itemprop="name"><a href="/about" itemprop="url">О нас</a></li>
+        <li itemprop="name"><a href="/contact" itemprop="url">Контакты</a></li>
     </ul>
 </nav>
 
@@ -141,7 +111,7 @@
 </form>
 
 <!-- Изображение -->
-<img src="{% static 'images/lui.png' %}" alt="Рекламный баннер">
+<img src="image.jpg" alt="Изображение">
 
 <!-- Видео и аудио -->
 <video controls>
@@ -150,5 +120,182 @@
 <audio controls>
     <source src="https://music.yandex.ru/album/1110198/track/10267566" type="audio/mpeg">
 </audio>
+<div class="container">
+        <h1 class="element-selector">Пример использования селекторов</h1>
+
+        <!-- Элементов -->
+        <p class="element-selector">Это текстовый элемент.</p>
+
+        <!-- Атрибутов -->
+        <input type="text" class="attribute-selector" placeholder="Атрибут с placeholder">
+
+        <!-- Атрибутов (начинается с подстроки) -->
+        <a href="https://example.com" class="attribute-starts-with">Ссылка на example.com</a>
+        <a href="https://google.com" class="attribute-starts-with">Ссылка на google.com</a>
+
+        <!-- Атрибутов (заканчивается подстрокой) -->
+        <a href="https://example.org" class="attribute-ends-with">Ссылка на example.org</a>
+        <a href="https://example.com" class="attribute-ends-with">Ссылка на example.com</a>
+
+        <!-- Атрибутов (с определенным значением) -->
+        <input type="checkbox" class="attribute-exact-value" checked>
+        <input type="checkbox" class="attribute-exact-value">
+
+        <!-- Классов -->
+        <p class="class-selector">Это элемент с классом.</p>
+
+        <!-- Комбинации селекторов (объединение) -->
+        <div class="combination-selector">
+            <h2 class="element-selector">Заголовок 2</h2>
+            <p class="element-selector">Элемент внутри div</p>
+        </div>
+
+        <!-- Селекторы потомков -->
+        <div class="descendant-selector">
+            <p>Это родительский элемент.</p>
+            <p class="element-selector">Это потомок родительского элемента.</p>
+        </div>
+
+        <!-- Селекторы дочерних элементов -->
+        <div class="child-selector">
+            <h2>Заголовок 2</h2>
+            <p class="element-selector">Это дочерний элемент h2.</p>
+        </div>
+
+    </div>
+
+ <ul class="custom-list">
+        <li>Элемент 1</li>
+        <li>Элемент 2</li>
+        <li>Элемент 3</li>
+        <li>Элемент 4</li>
+        <li>Элемент 5</li>
+        <li>Элемент 6</li>
+        <li>Элемент 7</li>
+        <li>Элемент 8</li>
+        <li>Элемент 9</li>
+        <li>Элемент 10</li>
+    </ul>
+
+<h1>Пример элементов формы с применением стилей</h1>
+
+    <form>
+        <label for="enabledInput">Доступное поле ввода:</label>
+        <input type="text" id="enabledInput" name="enabledInput" value="Доступно">
+        <br>
+
+        <label for="disabledInput">Заблокированное поле ввода:</label>
+        <input type="text" id="disabledInput" name="disabledInput" value="Заблокировано" disabled>
+        <br>
+
+        <label for="requiredInput">Обязательное поле ввода:</label>
+        <input type="text" id="requiredInput" name="requiredInput" required>
+        <br>
+
+        <label for="outOfRangeInput">Поле ввода со значением вне диапазона:</label>
+        <input type="number" id="outOfRangeInput" name="outOfRangeInput" class="out-of-range" min="1" max="10" value="11">
+        <br>
+
+        <label>Флажки:</label>
+        <input type="checkbox" id="checkbox1" name="checkbox1" checked>
+        <label for="checkbox1">Включено</label>
+        <input type="checkbox" id="checkbox2" name="checkbox2">
+        <label for="checkbox2">Выключено</label>
+        <br>
+
+        <label>Переключатели:</label>
+        <input type="radio" id="radio1" name="radioGroup" value="option1" checked>
+        <label for="radio1">Включено</label>
+        <input type="radio" id="radio2" name="radioGroup" value="option2">
+        <label for="radio2">Выключено</label>
+    </form>
+
+<table border="1">
+  <tr>
+    <td rowspan="2">1,1</td>
+    <td>1,2</td>
+    <td>1,3</td>
+    <td>1,4</td>
+    <td>1,5</td>
+    <td>1,6</td>
+    <td colspan="2">1,7 и 1,8</td>
+  </tr>
+  <tr>
+    <td>2,2</td>
+    <td>2,3</td>
+    <td>2,4</td>
+    <td>2,5</td>
+    <td></td>
+    <td></td>
+    <td>2,8</td>
+  </tr>
+  <tr>
+    <td>3,1</td>
+    <td colspan="2">3,2 и 3,3</td>
+    <td></td>
+    <td>3,5</td>
+    <td></td>
+    <td>3,7</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>4,1</td>
+    <td>4,2</td>
+    <td>4,3</td>
+    <td>4,4</td>
+    <td>4,5</td>
+    <td>4,6</td>
+    <td>4,7</td>
+    <td>4,8</td>
+  </tr>
+  <tr>
+    <td>5,1</td>
+    <td>5,2</td>
+    <td>5,3</td>
+    <td>5,4</td>
+    <td>5,5</td>
+    <td>5,6</td>
+    <td></td>
+    <td>5,8</td>
+  </tr>
+  <tr>
+    <td>6,1</td>
+    <td>6,2</td>
+    <td>6,3</td>
+    <td>6,4</td>
+    <td>6,5</td>
+    <td>6,6</td>
+    <td>6,7</td>
+    <td>6,8</td>
+  </tr>
+  <tr>
+    <td rowspan="2">7,1 и 7,2</td>
+    <td>7,3</td>
+    <td>7,4</td>
+    <td>7,5</td>
+    <td>7,6</td>
+    <td>7,7</td>
+    <td>7,8</td>
+  </tr>
+  <tr>
+    <td>8,3</td>
+    <td>8,4</td>
+    <td>8,5</td>
+    <td>8,6</td>
+    <td>8,7</td>
+    <td>8,8</td>
+  </tr>
+</table>
+ <blockquote lang="en">
+        <p>This is an English quote.</p>
+    </blockquote>
+
+    <blockquote lang="fr">
+        <p>C'est une citation en français.</p>
+    </blockquote>
+
+    <blockquote lang="es">
+        <p>Esta es una cita en español.</p>
+    </blockquote>
 </body>
 </html>

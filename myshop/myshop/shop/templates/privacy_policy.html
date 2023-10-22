@@ -1,8 +1,10 @@
 {% extends "default.html" %}
+{% load static %}
 {% block title %}{{privacy_policy.title}}{% endblock %}
 {% block content %}
-  <h1>Политика конфиденциальности</h1>
-<div class="privicy_policy">
-  <pre>{{ privacy_policy.content }}</pre>
+<link rel="stylesheet" type="text/css" href="{% static 'css/privacy_policy.css' %}">
+<h1 id="privacy">Политика конфиденциальности</h1>
+<div class="privacy_policy">
+    <pre>{{ privacy_policy.content }}</pre>
 </div>
 {% endblock %}

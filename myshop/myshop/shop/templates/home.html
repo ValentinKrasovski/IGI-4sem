@@ -3,9 +3,9 @@
 {% block title %}Главная{% endblock %}
 
 {% block content %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 <h2><em>Последняя новость!</em></h2>
-<h3>
+<h3 id="latest_article">
     {{ latest_article.title }} <a href="{% url 'shop:article_detail' latest_article.id  %}"><small>Читать далее</small></a>
 </h3>
 
@@ -16,7 +16,7 @@
         <source srcset="{% static 'images/desctop_banner.jpg' %}" media="(min-width: 1025px)">
         <img src="{% static 'images/banner.png' %}" alt="Рекламный баннер">
     </picture>
-    <figcaption>Баннер нашего магазина.</figcaption>
+    <figcaption></figcaption>
 </figure>
 
 
@@ -24,8 +24,9 @@
 <nav id="company_partners">
     <ul>
         {% for partner in partners %}
-        <li>
-            <a href="{{ partner.website }}" target="_blank">
+        <li class="partner-block">
+            <pre id="partner_name">{{partner.name}}</pre>
+            <a id="partner_logo" href="{{ partner.website }}" target="_blank">
                 <img src="{{ partner.logo.url }}" alt="{{ partner.name }}">
             </a>
         </li>

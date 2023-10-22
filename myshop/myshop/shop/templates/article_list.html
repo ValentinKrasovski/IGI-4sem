@@ -1,14 +1,19 @@
 {% extends "default.html" %}
+{% load static %}
 {% block title %}Новости{% endblock %}
 {% block content %}
-<h1>Новости кондитерского магазина</h1>
+<link rel="stylesheet" type="text/css" href="{% static 'css/article_list.css' %}">
 
-{% for article in articles %}
-<div class="article">
-    <h2>{{ article.title }}</h2>
-    <img src="{{ article.image.url }}" width="450" alt="{{ article.title }}">
-    <p>{{ article.short_content }}</p>
-    <a href="{% url 'shop:article_detail' article.id  %}">Читать далее</a>
-</div>
-{% endfor %}
+<h1>Новости кондитерского магазина</h1>
+<ul class="article-list">
+    {% for article in articles %}
+    <li class="article">
+        <h2>{{ article.title }}</h2>
+        <img src="{{ article.image.url }}" width="450" alt="{{ article.title }}">
+        <p id="article_short_content">{{ article.short_content }}</p>
+        <a class="read-more" href="{% url 'shop:article_detail' article.id  %}">Читать далее</a>
+    </li>
+    {% endfor %}
+
+</ul>
 {% endblock %}

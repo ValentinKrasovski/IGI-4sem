@@ -1,6 +1,8 @@
 {% extends "default.html" %}
+{% load static %}
 {% block title %}Вопросы{% endblock %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/ask_question.css' %}">
     <h1>Задать новый вопрос</h1>
     <form method="post" >
         {% csrf_token %}

@@ -2,65 +2,100 @@
 {% load static %}
 {% block title %}Контакты{% endblock %}
 {% block content %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'css/about_company.css' %}">
 <h1><em>{{ company.name }}</em></h1>
 
-<img src="{{ company.logo.url }}" alt="{{ company.name }} Logo">
+<img id="company_logo" src="{{ company.logo.url }}" alt="{{ company.name }}">
 
-<pre>{{ company.description }}</pre>
-<a href="#system">Вы также можете взглянуть на сертификат</a><br>
+<pre id="description">{{ company.description }}</pre>
 
-<iframe width="560" height="315" src="{{company.video_url}}"
+<iframe id="video_media" width="560" height="315" src="{{company.video_url}}"
         title="YouTube video player" frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen>
 </iframe>
 
 <h2>История компании</h2>
-<pre>{{ company.history }}</pre>
+<pre id="history">{{ company.history }}</pre>
 
 <h2>Реквизиты</h2>
-<pre>{{ company.requisites }}</pre>
+<pre id="requisites">{{ company.requisites }}</pre>
 
-<section class="certificate-section">
-    <h1 id="system"><b>Система сертификации <em>ГОСТ Р</em></b></h1>
-    <p><em>Федеральное агентство по техническому регулированию и метрологии</em></p>
-</section>
-<section class="certificate-section">
-    <h2 id="certificate"><strong>Сертификат соответствия</strong></h2>
-    <p>№ РОСС RU.АГ77.Ь00535</p>
-    <p>Срок действия с 16.03.2021 по 15.03.2024</p>
-    <p>№0101232</p>
-    <p>Орган по сертификации <small>рег. №РОСС RU.0001.10АГ77</small></p>
-    <p>продукции и услуг федерального бюджетного учреждения
-        <wb>"Государственный региональный центр стандартизации,
-            метрологии и испытаний в Оренбургской области" (ФБУ "Оренбургский ЦСМ")
-    </p>
-    <p><small>ул. 60 лет Октября, д.2 "Б", г. Оренбург, Российская Федерация,<br> 460021, тел. (3532) 33-82,
-        33-31-05</small></p>
-</section>
-<section class="certificate-section">
-    <h2 id="executor">ИСПОЛНИТЕЛЬ</h2>
-    <p>Индивидуальный предприниматель Рябцев Евгений Геннадьевич, цех "<em>Uno-momento</em>"</p>
-    <p>ОГРНИП №304560703000041 от 30.01.2004</p>
-    <p>Код-ОКПО: 0145225789. ИНН: 560708506854</p>
-    <p>Юридический адрес: 462356, РФ, Оренбургская обл., г. Новотроицк, ул. Мичурина</p>
-    <p>Фактический адрес: 462420, РФ, Оренбургская обл., г. Орск, ул. Краматорская, 50 А</p>
-    <p>Телефон: (3537) 66-00-88, 31-03-03</p>
-</section>
-<section class="certificate-section">
-    <h2 id="director">Руководитель органа</h2>
-    <p>А.П. Антипова</p>
-</section>
-<section class="certificate-section">
-    <h2 id="expert">Эксперт</h2>
-    <p>С.В. Коваленко</p>
-</section>
-<section class="certificate-section">
-    <h2 id="not-applicable">Сертификат не применяется при обязательной сертификации</h2>
-</section>
-<section class="certificate-section">
-    <p><sup>&copy;</sup> 2023 Федеральное агентство по техническому регулированию и метрологии</p>
-</section>
+
+
+<figure id="certificate" class="certificate">
+    <h1>СЕРТИФИКАТ</h1>
+    <p>Настоящим удостоверяется, что</p>
+    <h2>Lovin_Sweet</h2>
+    <p>является официальным владельцем и администратором веб-сайта</p>
+    <h3>Lovin_Sweet.by</h3>
+    <p>в течение срока действия данного сертификата.</p>
+    <p>Сертификат выдан 01.01.2015 и действителен до 01.01.2025.</p>
+    <p>Этот сертификат подтверждает, что Lovin_Sweet обладает всеми
+        необходимыми правами и полномочиями на управление и содержание
+        Lovin_Sweet.by.</p>
+        <div class="off-data">
+            <div class="upoln">
+              <p><em>Подпись уполномоченного лица</em></p>
+              <p itemprop="name"><strong>Красовский В.А.</strong></p>
+              <p>Владелеца <strong>ООО "Lovin_Sweet"</strong></p>
+            </div>
+            <div class="facsimilie">
+              <img src="https://power.org.ua/images/izgotovlenie-faksimile.png"
+                class="podpis">
+              <img src="https://abali.ru/wp-content/uploads/2011/04/pechat.png"
+                class="pechat">
+            </div>
+          </div>
+          <p class="podtverzdenie">Для подтверждения действительности этого сертификата, пожалуйста,
+            посетите
+            наш веб-сайт Lovin_Sweet.by или свяжитесь с нами по телефону <a
+              href="tel:+375295656566">+375 (29) 565-65-66</a>.</p>
+</figure>
+
+
+<!--<div id="certificate">-->
+<!--    <section class="certificate-section">-->
+<!--        <h1 id="system"><b>Система сертификации <em>ГОСТ Р</em></b></h1>-->
+<!--        <p><em>Федеральное агентство по техническому регулированию и метрологии</em></p>-->
+<!--    </section>-->
+<!--    <section class="certificate-section">-->
+<!--        <h2 id="certificate_name"><strong>Сертификат соответствия</strong></h2>-->
+<!--        <p>№ РОСС RU.АГ77.Ь00535</p>-->
+<!--        <p>Срок действия с 16.03.2021 по 15.03.2024</p>-->
+<!--        <p>№0101232</p>-->
+<!--        <p>Орган по сертификации <small>рег. №РОСС RU.0001.10АГ77</small></p>-->
+<!--        <p>продукции и услуг федерального бюджетного учреждения-->
+<!--            <wb>"Государственный региональный центр стандартизации,-->
+<!--                метрологии и испытаний в Оренбургской области" (ФБУ "Оренбургский ЦСМ")-->
+<!--        </p>-->
+<!--        <p><small>ул. 60 лет Октября, д.2 "Б", г. Оренбург, Российская Федерация,<br> 460021, тел. (3532) 33-82,-->
+<!--            33-31-05</small></p>-->
+<!--    </section>-->
+<!--    <section class="certificate-section">-->
+<!--        <h2 id="executor">ИСПОЛНИТЕЛЬ</h2>-->
+<!--        <p>Индивидуальный предприниматель Рябцев Евгений Геннадьевич, цех "<em>Uno-momento</em>"</p>-->
+<!--        <p>ОГРНИП №304560703000041 от 30.01.2004</p>-->
+<!--        <p>Код-ОКПО: 0145225789. ИНН: 560708506854</p>-->
+<!--        <p>Юридический адрес: 462356, РФ, Оренбургская обл., г. Новотроицк, ул. Мичурина</p>-->
+<!--        <p>Фактический адрес: 462420, РФ, Оренбургская обл., г. Орск, ул. Краматорская, 50 А</p>-->
+<!--        <p>Телефон: (3537) 66-00-88, 31-03-03</p>-->
+<!--    </section>-->
+<!--    <section class="certificate-section">-->
+<!--        <h2 id="director">Руководитель органа</h2>-->
+<!--        <p>А.П. Антипова</p>-->
+<!--    </section>-->
+<!--    <section class="certificate-section">-->
+<!--        <h2 id="expert">Эксперт</h2>-->
+<!--        <p>С.В. Коваленко</p>-->
+<!--    </section>-->
+<!--    <section class="certificate-section">-->
+<!--        <h2 id="not-applicable">Сертификат не применяется при обязательной сертификации</h2>-->
+<!--    </section>-->
+<!--    <section class="certificate-section">-->
+<!--        <p><sup>&copy;</sup> 2023 Федеральное агентство по техническому регулированию и метрологии</p>-->
+<!--    </section>-->
+
+</div>
 
 {% endblock %}

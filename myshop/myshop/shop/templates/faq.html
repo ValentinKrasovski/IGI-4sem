@@ -1,12 +1,14 @@
 {% extends "default.html" %}
+{% load static %}
 {% block title %}
 FAQ
 {% endblock %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/faq.css' %}">
 <h1>Часто задаваемые вопросы</h1>
-<ul>
+<ul class="faq">
     {% for faq in faqs %}
-    <li>
+    <li id="faq_answer">
         {% if faq.user_name %}
         <p>Задано пользователем: {{ faq.user_name }} <br> {{faq.date_added}}</p>
         {% endif %}

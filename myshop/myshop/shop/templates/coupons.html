@@ -1,35 +1,42 @@
 {% extends "default.html" %}
+{% load static %}
 {% block title %}Промокоды и купоны{% endblock %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/coupons.css' %}">
 <h1>Промокоды</h1>
 
-    <h2>Активные промокоды и купоны</h2>
-    <ul>
-        {% for coupon in active_coupons %}
-        <li>
-            <strong>Код:</strong> {{ coupon.code }}<br>
+<h2>Активные промокоды и купоны</h2>
+<ul class="active">
+    {% for coupon in active_coupons %}
+    <li>
+        <strong>Код:</strong> {{ coupon.code }}<br>
+        <div class="description_coupon">
             <strong>Описание:</strong> {{ coupon.description }}<br>
             <strong>Действителен с:</strong> {{ coupon.valid_from }}<br>
             <strong>Действителен по:</strong> {{ coupon.valid_to }}<br>
             <strong>Скидка:</strong> {{ coupon.discount }}%<br>
-        </li>
-        {% empty %}
-        <li>Нет активных промокодов.</li>
-        {% endfor %}
-    </ul>
+        </div>
 
-    <h2>Архивные промокоды и купоны</h2>
-    <ul>
-        {% for coupon in archived_coupons %}
-        <li>
-            <strong>Код промокода:</strong> {{ coupon.code }}<br>
+    </li>
+    {% empty %}
+    <li>Нет активных промокодов.</li>
+    {% endfor %}
+</ul>
+
+<h2>Архивные промокоды и купоны</h2>
+<ul class="disactive">
+    {% for coupon in archived_coupons %}
+    <li>
+        <strong>Код промокода:</strong> {{ coupon.code }}<br>
+        <div class="description_coupon">
             <strong>Описание:</strong> {{ coupon.description }}<br>
-            <strong>Действителен с:</strong> {{ coupon.valid_from }}<br>
-            <strong>Действителен по:</strong> {{ coupon.valid_to }}<br>
-            <strong>Скидка:</strong> {{ coupon.discount }}%<br>
-        </li>
-        {% empty %}
-        <li>Нет архивных промокодов.</li>
-        {% endfor %}
-    </ul>
+        <strong>Действителен с:</strong> {{ coupon.valid_from }}<br>
+        <strong>Действителен по:</strong> {{ coupon.valid_to }}<br>
+        <strong>Скидка:</strong> {{ coupon.discount }}%<br>
+        </div>
+    </li>
+    {% empty %}
+    <li>Нет архивных промокодов.</li>
+    {% endfor %}
+</ul>
 {% endblock %}

@@ -1,0 +1,42 @@
+/* Маркер для списка активных промокодов */
+ul.active {
+    list-style-type: none; /* Убираем стандартный маркер */
+    padding: 0;
+}
+
+ul.active li {
+    position: relative;
+    padding-left: 20px; /* Расстояние от маркера до текста */
+}
+
+ul.active li:before {
+    content: "\2713"; /* Это символ юникода для крестика */
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #007BFF; /* Цвет маркера */
+    font-size: 18px; /* Размер маркера */
+    line-height: 1; /* Выровнять маркер по центру относительно текста */
+}
+
+
+/* Маркер для списка архивных промокодов */
+ul.disactive {
+    list-style-type: none; /* Убираем стандартный маркер */
+    padding: 0;
+}
+
+ul.disactive li {
+    position: relative;
+    padding-left: 20px; /* Расстояние от маркера до текста */
+}
+
+ul.disactive li:before {
+    content: "\25A2"; /* Это символ юникода для квадрата */
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #FF0000; /* Цвет маркера */
+    font-size: 18px; /* Размер маркера */
+    line-height: 1; /* Выровнять маркер по центру относительно текста */
+}

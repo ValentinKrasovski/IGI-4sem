@@ -1,0 +1,31 @@
+.faq {
+    list-style-type: none;
+    padding: 0;
+}
+
+#faq_answer {
+    margin-bottom: 20px;
+}
+
+.faq p {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+}
+
+.faq details {
+    cursor: pointer;
+    margin-top: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.faq summary {
+    font-weight: bold;
+}
+
+.faq details[open] {
+    background-color: #fff;
+}

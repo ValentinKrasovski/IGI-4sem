@@ -1,8 +1,10 @@
 {% extends "default.html" %}
+{% load static%}
 {% block title %}Отзывы{% endblock %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/review_list.css' %}">
     <h1>Отзывы</h1>
-    <ul>
+    <ul class="review_list">
         {% for review in reviews %}
             <li>
                 <strong>Пользователь: {{ review.user.username }}</strong><br>
@@ -12,5 +14,5 @@
             </li>
         {% endfor %}
     </ul>
-    <a href="{% url 'shop:add_review' %}">Add a Review</a>
+    <a id="add_review" href="{% url 'shop:add_review' %}">Add a Review</a>
 {% endblock %}

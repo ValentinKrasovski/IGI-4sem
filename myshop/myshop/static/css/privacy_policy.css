@@ -1,0 +1,15 @@
+.privacy_policy {
+    max-width: 800px; /* Максимальная ширина блока контента */
+    margin: 0 auto; /* Выравнивание по центру страницы */
+    padding: 20px; /* Внутренний отступ вокруг контента */
+    background-color: #f8f8f8; /* Цвет фона блока контента */
+    border: 1px solid #ddd; /* Подчеркивание блока контента */
+}
+
+.privacy_policy pre {
+    white-space: pre-wrap; /* Перенос текста в пределах контейнера */
+}
+
+#privacy {
+    text-align: center;
+}
