@@ -4,28 +4,57 @@
 
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
-<h2><em>Последняя новость!</em></h2>
+<script src="{% static 'js/scroll_animation.js' %}" defer></script>
+<script src="{% static 'js/banner_change.js' %}" defer></script>
+
+
+<section id="top">
+    <img src="{% static 'images/4-fon.png' %}" id="bg" />
+    <h2 id="text">Lovin Sweets</h2>
+    <img src="{% static 'images/anime-con-removebg.png' %}" id="man" />
+    <img src="https://aryan-tayal.github.io/Mountains-Parallax/clouds_1.png" id="clouds_1" />
+    <img src="https://aryan-tayal.github.io/Mountains-Parallax/clouds_2.png" id="clouds_2" />
+    <img src="{% static 'images/door_left.png' %}" id="door_left" />
+    <img src="{% static 'images/door_right.png' %}" id="door_right" />
+</section>
+
+<h2><br><em>Последняя новость!<br></em></h2>
 <h3 id="latest_article">
     {{ latest_article.title }} <a href="{% url 'shop:article_detail' latest_article.id  %}"><small>Читать далее</small></a>
 </h3>
-
-<figure id="cite_banner">
+<br>
+<!--
+<figure class="cite_banner">
     <picture>
-        <source srcset="{% static 'images/mob_banner.jpg' %}" media="(max-width: 767px)">
-        <source srcset="{% static 'images/plan_banner.jpg' %}" media="(min-width: 768px) and (max-width: 1024px)">
-        <source srcset="{% static 'images/desctop_banner.jpg' %}" media="(min-width: 1025px)">
-        <img src="{% static 'images/banner.png' %}" alt="Рекламный баннер">
+        &lt;!&ndash; ваш код для баннера &ndash;&gt;
+        <img src="{% static 'images/banner.png' %}" alt="Рекламный баннер" id="banner-image">
     </picture>
     <figcaption></figcaption>
 </figure>
+-->
+<div class="advertisements-list">
+    {% for advertisement in advertisements %}
+        <div class="advertisement{% if forloop.first %} active{% endif %}">
+            <h2>Реклама</h2>
+            <img src="{{ advertisement.image.url }}" alt="{{ advertisement.adv_name }} Banner" class="adv-image">
+            <a href="{{ advertisement.link }}" target="_blank" class="adv-link">Перейти к рекламному ресурсу</a>
+        </div>
+    {% endfor %}
+</div>
 
+<!-- Элементы управления интервалом ротации -->
+<form id="banner-rotation-form">
+    <label for="rotation-interval">Интервал (секунды):</label>
+    <input type="number" id="rotation-interval" name="rotation-interval" value="5">
+    <input type="button" value="Применить" id="apply-interval">
+</form>
 
 <h2>Список компаний-партнеров:</h2>
 <nav id="company_partners">
     <ul>
         {% for partner in partners %}
         <li class="partner-block">
-            <pre id="partner_name">{{partner.name}}</pre>
+            <pre id="partner_name">{{ partner.name }}</pre>
             <a id="partner_logo" href="{{ partner.website }}" target="_blank">
                 <img src="{{ partner.logo.url }}" alt="{{ partner.name }}">
             </a>

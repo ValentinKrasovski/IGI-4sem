@@ -84,7 +84,7 @@ iframe {
     background: repeating-linear-gradient(rgb(0, 39, 178), rgb(0, 39, 178) 1px, #ff7676 2px, #ff7676 3px);
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;/*означает, что цвет текста будет прозрачным*/
     color: #000000;
     padding-top: 80px;
     padding-bottom: 50px;

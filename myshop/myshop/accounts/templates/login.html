@@ -2,11 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
 <body>
+    <script>
+        let isAgeVerified = false;
+
+        function checkAge(callback) {
+            const birthDate = prompt("Введите дату рождения в формате ГГГГ-ММ-ДД");
+            const parsedDate = new Date(birthDate);
+
+            if (isNaN(parsedDate.getTime())) {
+                alert("Некорректная дата. Пожалуйста, введите дату в правильном формате.");
+                return;
+            }
+
+            const ageInMilliseconds = Date.now() - parsedDate.getTime();
+            const ageInYears = new Date(ageInMilliseconds).getUTCFullYear() - 1970;
+
+            const daysOfWeek = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+            const dayOfWeek = daysOfWeek[parsedDate.getDay()];
+
+            if (ageInYears >= 18) {
+                isAgeVerified = true;
+                alert(`Вы совершеннолетний. День недели вашего рождения: ${dayOfWeek}`);
+            } else {
+                const parentPermission = confirm("Вы несовершеннолетний. Для продолжения необходимо разрешение родителей. Родители, разрешаете?");
+                if (parentPermission) {
+                    isAgeVerified = true;
+                    alert(`Спасибо! День недели вашего рождения: ${dayOfWeek}`);
+                } else {
+                    isAgeVerified = false;
+                    alert("Извините, доступ запрещен без разрешения родителей.");
+                }
+            }
+
+            // Выполняем функцию обратного вызова с результатом подтверждения
+            callback(isAgeVerified);
+        }
+
+        function onFormSubmit(event) {
+            // Предотвращаем отправку формы, если возраст не подтвержден
+            if (!isAgeVerified) {
+                event.preventDefault();
+                // Передаем функцию обратного вызова в checkAge для продолжения отправки формы
+                checkAge((verified) => {
+                    if (verified) {
+                        // Если возраст подтвержден, вручную отправляем форму
+                        event.currentTarget.submit();
+                    } else {
+                        alert("Вам необходимо подтвердить свой возраст или получить разрешение родителей!");
+                    }
+                });
+            }
+        }
+    </script>
+
     <h1>Login</h1>
-    <form method="post" >
+    <form method="post" onsubmit="onFormSubmit(event);">
         {% csrf_token %}
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br><br>
@@ -15,6 +69,11 @@
         <button type="submit">Log in</button>
     </form>
     <p>Don't have an account? <a href="{% url 'accounts:registration' %}">Register</a></p>
-<a href="{% url 'shop:home' %}">Home</a></p>
+    <a href="{% url 'shop:home' %}">Home</a>
+
+    <!-- Вызываем функцию checkAge() при загрузке страницы -->
+    <script>
+        checkAge(() => {});
+    </script>
 </body>
 </html>

@@ -17,6 +17,11 @@ urlpatterns = [
     path('reviews/add/', views.add_review, name='add_review'),
     path('coupons/', views.coupons, name='coupons'),
     path('example/', views.example_view, name='example_view'),
+    path('apply/', views.coupon_apply, name='apply'),
+
+    path('test/', views.test_view, name='test_view'),
+    path('oop/', views.oop_view, name='oop_view'),
+    path('youngest_emp/', views.youngest_view, name='youngest_view'),
     path('product_list/', views.product_list, name='product_list'),
     path('<slug:category_slug>/', views.product_list, name='product_list_by_category'),
     path('<int:id>/<slug:slug>/', views.product_detail, name='product_detail'),

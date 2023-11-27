@@ -3,7 +3,7 @@
     padding: 0;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: wrap;/* указывает, что элементы будут переноситься на новую строку или колонку при нехватке места на текущей*/
     justify-content: space-between;
 
     /* Медиа-запрос для мобильных устройств */

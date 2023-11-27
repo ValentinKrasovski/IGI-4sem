@@ -1,11 +1,15 @@
 from django.contrib.sites import requests
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Category, Product, Article, Partner, Company, FAQ, Employee, Vacancy, PrivacyPolicy, Review, Coupon
+from .models import Category, Product, Article, Partner, Company, FAQ, Employee, Vacancy, PrivacyPolicy, Review, Coupon, Advertisement
 from .forms import FAQForm, ReviewForm
 from django.contrib.auth.decorators import login_required
 from cart.forms import CartAddProductForm
 import pytz
 import datetime
+
+from django.views.decorators.http import require_POST
+from django.utils import timezone
+from .forms import CouponApplyForm
 
 def home(request):
     # Получаем последнюю опубликованную статью
@@ -15,10 +19,12 @@ def home(request):
     partners = Partner.objects.all()
     user_timezone = pytz.timezone(request.session.get('user_timezone', 'UTC'))
     user_current_time = datetime.datetime.now(user_timezone)
+    advertisements = Advertisement.objects.all()
     context = {
         'latest_article': latest_article,
         'partners': partners,
         'user_current_time': user_current_time,
+        'advertisements': advertisements,
     }
     return render(request, 'home.html', context)
 
@@ -102,8 +108,38 @@ def coupons(request):
     archived_coupons = Coupon.objects.filter(active=False)
     return render(request, 'coupons.html', {'active_coupons': active_coupons, 'archived_coupons':archived_coupons})
 
+
+
+@require_POST
+def coupon_apply(request):
+    now = timezone.now()
+    form = CouponApplyForm(request.POST)
+    if form.is_valid():
+        code = form.cleaned_data['code']
+        try:
+            coupon = Coupon.objects.get(code__iexact=code,
+                                        valid_from__lte=now,
+                                        valid_to__gte=now,
+                                        active=True)
+            request.session['coupon_id'] = coupon.id
+        except Coupon.DoesNotExist:
+            request.session['coupon_id'] = None
+    return redirect('cart:cart_detail')
+
+
+
 def example_view(request):
     return render(request, 'example.html')
+
+
+def test_view(request):
+    return render(request, 'test.html')
+
+def oop_view(request):
+    return render(request, 'oop.html')
+
+def youngest_view(request):
+    return render(request, 'youngest_emp.html')
 
 
 def product_list(request, category_slug=None):

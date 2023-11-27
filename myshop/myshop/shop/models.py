@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save,post_save
 from django.dispatch import receiver
 from django.utils import timezone
 
@@ -17,6 +17,16 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+class Advertisement(models.Model):
+    adv_name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='advertisement')
+    link = models.CharField(max_length=200)
+
+    def get_absolute_url(self):
+        return reverse('advertisement-detail', args=[str(self.id)])
+
+    def str(self):
+        return self.adv_name
 
 class Partner(models.Model):
     name = models.CharField(max_length=200)
@@ -97,6 +107,9 @@ class Review(models.Model):
     def __str__(self):
         return f"Review by {self.user.username} - {self.date_added}"
 
+class ActiveCouponManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(active=True, valid_to__gte=timezone.now())
 
 # Промокоды
 class Coupon(models.Model):
@@ -106,15 +119,25 @@ class Coupon(models.Model):
     valid_to = models.DateTimeField()
     discount = models.DecimalField(max_digits=10, decimal_places=2)
     active = models.BooleanField(default=True)
+    objects = models.Manager()  # Менеджер по умолчанию
+    active_coupons = ActiveCouponManager()  # Кастомный менеджер для активных купонов
 
     def __str__(self):
         return self.code
 
-
-@receiver(pre_save, sender=Coupon)
-def set_coupon_active(sender, instance, **kwargs):
-    if instance.valid_to < timezone.now():
-        instance.active = False
+    def save(self, *args, **kwargs):
+        if self.valid_to < timezone.now() and self.active:
+            self.active = False
+        super(Coupon, self).save(*args, **kwargs)
+#     def __str__(self):
+#         return self.code
+#
+#
+# @receiver(post_save, sender=Coupon)
+# def set_coupon_active(sender, instance, **kwargs):
+#     if instance.valid_to < timezone.now() and instance.active:
+#         instance.active = False
+#         instance.save()
 
 
 class Category(models.Model):

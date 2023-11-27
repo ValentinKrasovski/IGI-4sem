@@ -1,0 +1,25 @@
+table {
+    border-collapse: collapse;
+    margin: 10px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 20px; /* Увеличьте отступ для ячеек */
+    text-align: center;
+    width: 20px; /* Установите ширину */
+    height:20px; /* Установите высоту */
+}
+
+.selected {
+    background: linear-gradient(135deg, #9b59b6, #e74c3c); /* Фиолетовый градиент */
+    color: white; /* Белый текст */
+}
+
+.selected-even {
+    background: linear-gradient(135deg, #3498db, #e91e63); /* Розовый градиент */
+    color: white; /* Белый текст */
+}

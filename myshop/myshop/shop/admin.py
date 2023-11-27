@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Article, Partner, Company, FAQ, Employee, PrivacyPolicy, Vacancy, Review, Coupon
+from .models import Category, Product, Article, Partner, Company, FAQ, Employee, PrivacyPolicy, Vacancy, Review, Coupon, Advertisement
 
 # Регистрация для Главной
 admin.site.register(Article)
@@ -11,6 +11,7 @@ admin.site.register(PrivacyPolicy)
 admin.site.register(Vacancy)
 admin.site.register(Review)
 admin.site.register(Coupon)
+admin.site.register(Advertisement)
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']

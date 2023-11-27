@@ -3,6 +3,33 @@
 {% block title %}Новости{% endblock %}
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/article_list.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Подключаем jQuery -->
+<script src="{% static 'js/change_size_in_articles.js' %}" defer></script>
+<!-- Форма для выбора опций -->
+<form id="styleOptions">
+    <label for="fontSize">Размер шрифта:</label>
+    <select id="fontSize">
+        <option value="14">Маленький</option>
+        <option value="16">Средний</option>
+        <option value="18">Большой</option>
+        <option value="20">Огромный</option>
+    </select>
+
+    <label for="textColor">Цвет текста:</label>
+    <input type="color" id="textСolor" name="text-color">
+
+
+    <label for="bgColor">Цвет фона:</label>
+    <select id="bgColor">
+        <option value="#fff">Белый</option>
+        <option value="#f0f0f0">Светло-серый</option>
+        <option value="#e0e0e0">Темно-серый</option>
+        <option value="#ffcc00">Желтый</option>
+        <option value="#9900cc">Фиолетовый</option>
+        <option value="#ffa07a">Лосось</option>
+    </select>
+    <button type="button" onclick="applyStyles()">Применить стили</button>
+</form>
 
 <h1>Новости кондитерского магазина</h1>
 <ul class="article-list">
@@ -14,6 +41,5 @@
         <a class="read-more" href="{% url 'shop:article_detail' article.id  %}">Читать далее</a>
     </li>
     {% endfor %}
-
 </ul>
 {% endblock %}

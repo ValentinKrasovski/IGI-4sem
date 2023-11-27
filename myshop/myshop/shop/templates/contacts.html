@@ -2,11 +2,13 @@
 {% load static %}
 {% block title %}Контакты{% endblock %}
 {% block content %}
+<script src="{% static 'js/3d_cards_contacts.js' %}" defer></script>
+
 <link rel="stylesheet" type="text/css" href="{% static 'css/contacts.css' %}">
 <h1>Сотрудники</h1>
 <ul class="contacts">
     {% for employee in employees %}
-    <li id="contact_one">
+    <li class="contact_one">
         <h2>{{ employee.first_name }} {{ employee.last_name }}</h2>
         <img src="{{employee.image.url}}" width="650" alt="{{ employee.last_name }}">
         <p id="doljnost">Должность: {{ employee.position }}</p>
@@ -14,6 +16,7 @@
         <p id="telephone">Телефон: {{ employee.phone }}</p>
         <p id="description">Описание: {{ employee.description }}</p>
     </li>
+
     {% endfor %}
 </ul>
 {% endblock %}
